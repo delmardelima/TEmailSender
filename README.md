@@ -15,25 +15,25 @@ TEmailSender is a simple Delphi class for sending emails from Delphi application
 ## Usage
 Here's an example of how to use the TEmailSender class:
 
-```
+```Delphi
 var
-EmailSender: TEmailSender;
+  EmailSender: TEmailSender;
 begin
-EmailSender := TEmailSender.Create;
-try
-EmailSender.Host := 'smtp.example.com';
-EmailSender.Port := 587;
-EmailSender.Username := 'user@example.com';
-EmailSender.Password := 'secret';
-EmailSender.From := 'user@example.com';
-EmailSender.FromName := 'User Name';
-EmailSender.To := 'recipient@example.com';
-EmailSender.Subject := 'Test Email';
-EmailSender.Body := 'This is a test email sent using the TEmailSender class.';
-EmailSender.Send;
-finally
-EmailSender.Free;
-end;
+  EmailSender := TEmailSender.Create;
+  try
+    EmailSender.Host := 'smtp.example.com';
+    EmailSender.Port := 587;
+    EmailSender.Username := 'user@example.com';
+    EmailSender.Password := 'secret';
+    EmailSender.From := 'user@example.com';
+    EmailSender.FromName := 'User Name';
+    EmailSender.To := 'recipient@example.com';
+    EmailSender.Subject := 'Test Email';
+    EmailSender.Body := 'This is a test email sent using the TEmailSender class.';
+    EmailSender.Send;
+  finally
+    EmailSender.Free;
+  end;
 end;
 ```
 
