@@ -1,2 +1,41 @@
-# TEmailSender
-O TEmailSender é uma classe simples para enviar e-mails a partir de aplicativos Delphi. Com configurações fáceis para servidor SMTP, remetente, destinatário, assunto e corpo da mensagem, além de suporte a anexos de arquivos. Este repositório inclui uma implementação completa e exemplos de uso. Envie e-mails com facilidade em suas aplicações Delphi.
+# TEmailSender - Delphi Email Sending Class
+
+TEmailSender is a simple Delphi class for sending emails from Delphi applications. With easy-to-set configurations for SMTP server, sender, recipient, subject, and message body, and support for file attachments, sending emails has never been easier. This repository includes a complete implementation of the TEmailSender class and usage examples to help you get started quickly.
+
+## Features
+- Easy-to-use interface
+- Support for SMTP server configuration
+- Support for sender, recipient, subject, and message body
+- Support for file attachments
+
+## Requirements
+- Delphi 7 or later
+- Indy 10 or later
+
+## Usage
+Here's an example of how to use the TEmailSender class:
+
+```
+var
+EmailSender: TEmailSender;
+begin
+EmailSender := TEmailSender.Create;
+try
+EmailSender.Host := 'smtp.example.com';
+EmailSender.Port := 587;
+EmailSender.Username := 'user@example.com';
+EmailSender.Password := 'secret';
+EmailSender.From := 'user@example.com';
+EmailSender.FromName := 'User Name';
+EmailSender.To := 'recipient@example.com';
+EmailSender.Subject := 'Test Email';
+EmailSender.Body := 'This is a test email sent using the TEmailSender class.';
+EmailSender.Send;
+finally
+EmailSender.Free;
+end;
+end;
+´´´
+
+## License
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for more details.
