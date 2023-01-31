@@ -93,9 +93,49 @@ begin
   end;
 end;
 ```
+# Delmar de Lima (Cortes DEV)
+
+## Support
+Get in touch with us for any questions or inquiries through WhatsApp: https://wa.me/5597991442486
+
+## Suporte
+Entre em contato conosco para qualquer dúvida ou pergunta pelo WhatsApp: https://wa.me/5597991442486
+
+## Donations 
+Donate via PIX:
+### Email: delmar.apui@gmail.com
+### Cell: (97) 99144-2486
+
+## Connect with us
+##### [YouTube][] 
+##### [WhatsApp][]
+##### [Instagram][]
+##### [Facebook][] 
+##### [Delphi Modern Layout Source Code][]
+##### [CortesDEV Website][] <br/>
+
+## Conecte-se com a gente
+##### [YouTube][] 
+##### [WhatsApp][]
+##### [Instagram][]
+##### [Facebook][] 
+##### [Código Fonte Layout Moderno em Delphi][]
+
+Get to know us better on our YouTube channel: <br/>
+**[>> FIND OUT MORE](https://bit.ly/SeguirCortesDev)**
+
+Conheça mais sobre nós em nosso canal no YouTube: <br/>
+**[>> CONHEÇA MAIS](https://bit.ly/SeguirCortesDev)**
 
 ## License
 This project is licensed under the GPL-3.0 License. See [LICENSE](LICENSE) for more details.
 
 ## Licença
 Este projeto está licenciado sob a Licença GPL-3.0. Veja [LICENSE](LICENSE) para mais detalhes.
+
+[YouTube]: https://bit.ly/SeguirCortesDev
+[WhatsApp]: https://wa.me/5597991442486
+[Instagram]: https://www.instagram.com/cortesdevoficial/
+[Facebook]: https://www.fb.com/cortesdevoficial
+[Delphi Modern Layout Source Code]: https://bit.ly/LayoutModerno
+[Código Fonte Layout Moderno em Delphi]: https://bit.ly/LayoutModerno
