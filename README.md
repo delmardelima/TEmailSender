@@ -1,7 +1,8 @@
 # TEmailSender - Delphi Email Sending Class
-# TEmailSender - Classe de Envio de E-mail Delphi
 
 TEmailSender is a simple Delphi class for sending emails from Delphi applications. With easy-to-set configurations for SMTP server, sender, recipient, subject, and message body, and support for file attachments, sending emails has never been easier. This repository includes a complete implementation of the TEmailSender class and usage examples to help you get started quickly.
+
+# TEmailSender - Classe de Envio de E-mail Delphi
 
 O TEmailSender é uma classe simples para enviar e-mails a partir de aplicações Delphi. Com configurações fáceis para servidor SMTP, remetente, destinatário, assunto e corpo da mensagem, e suporte a anexos de arquivos, o envio de e-mails nunca foi tão fácil. Este repositório inclui uma implementação completa da classe TEmailSender e exemplos de uso para ajudá-lo a começar rapidamente.
 
