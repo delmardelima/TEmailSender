@@ -106,13 +106,17 @@ Donate via PIX:
 ### Email: delmar.apui@gmail.com
 ### Cell: (97) 99144-2486
 
+## Doações 
+Faça sua doação via PIX:
+### Email: delmar.apui@gmail.com
+### Celular: (97) 99144-2486
+
 ## Connect with us
 ##### [YouTube][] 
 ##### [WhatsApp][]
 ##### [Instagram][]
 ##### [Facebook][] 
 ##### [Delphi Modern Layout Source Code][]
-##### [CortesDEV Website][] <br/>
 
 ## Conecte-se com a gente
 ##### [YouTube][] 
