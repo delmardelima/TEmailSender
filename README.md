@@ -26,30 +26,70 @@ O TEmailSender é uma classe simples para enviar e-mails a partir de aplicaçõe
 - Delphi 7 ou posterior
 - Indy 10 ou posterior
 
+## Installation
+1. Download the `TEmailSender.pas` file.
+2. Add the file to your Delphi project.
+3. In the uses section of your project, add `TEmailSender` to the list of units.
+4. Start using the `TEmailSender` class in your code.
+
+## Instalação
+1. Baixe o arquivo `TEmailSender.pas`.
+2. Adicione o arquivo ao seu projeto Delphi.
+3. Na seção "uses" do seu projeto, adicione `TEmailSender` à lista de unidades.
+4. Comece a usar a classe `TEmailSender` no seu código.
+
 ## Usage
 Here's an example of how to use the TEmailSender class:
+```Delphi
+var
+  email:TEmailSender;
+begin
+  email := TEmailSender.Create;
+  try
+    email.Server := 'smtp.yourserver.com';
+    email.Username := 'youremail@yourserver.com';
+    email.Password := 'yourpassword';
+    email.From := 'youremail@yourserver.com';
+    email.Recipient := 'recipient@yourserver.com';
+    email.Subject := 'Test email with attachment';
+    email.Body := 'This is a test email with attachment';
+    email.AddAttachment('c:\attachedfile.pdf');
+    try
+      email.Send;
+    except
+      on E: Exception do
+        ShowMessage('Error sending email: ' + E.Message);
+    end;
+  finally
+    email.Free;
+  end;
+end;
+```
 
 ## Uso
 Aqui está um exemplo de como usar a classe TEmailSender:
-
 ```Delphi
 var
-  EmailSender: TEmailSender;
+  email: TEmailSender;
 begin
-  EmailSender := TEmailSender.Create;
+  email := TEmailSender.Create;
   try
-    EmailSender.Host := 'smtp.example.com';
-    EmailSender.Port := 587;
-    EmailSender.Username := 'user@example.com';
-    EmailSender.Password := 'secret';
-    EmailSender.From := 'user@example.com';
-    EmailSender.FromName := 'User Name';
-    EmailSender.To := 'recipient@example.com';
-    EmailSender.Subject := 'Test Email';
-    EmailSender.Body := 'This is a test email sent using the TEmailSender class.';
-    EmailSender.Send;
+    email.Server := 'smtp.seuservidor.com';
+    email.Username := 'seuemail@seuservidor.com';
+    email.Password := 'suasenha';
+    email.From := 'seuemail@seuservidor.com';
+    email.Recipient := 'destinatario@seuservidor.com';
+    email.Subject := 'Teste de envio de e-mail com anexo';
+    email.Body := 'Este é um teste de envio de e-mail com anexo';
+    email.AddAttachment('c:\arquivoanexo.pdf');
+    try
+      email.Send;
+    except
+      on E: Exception do
+        ShowMessage('Erro ao enviar e-mail: ' + E.Message);
+    end;
   finally
-    EmailSender.Free;
+    email.Free;
   end;
 end;
 ```
