@@ -27,16 +27,16 @@ O TEmailSender é uma classe simples para enviar e-mails a partir de aplicaçõe
 - Indy 10 ou posterior
 
 ## Installation
-1. Download the `TEmailSender.pas` file.
+1. Download the `EmailSender.pas` file.
 2. Add the file to your Delphi project.
-3. In the uses section of your project, add `TEmailSender` to the list of units.
-4. Start using the `TEmailSender` class in your code.
+3. In the uses section of your project, add `EmailSender` to the list of units.
+4. Start using the `EmailSender` class in your code.
 
 ## Instalação
-1. Baixe o arquivo `TEmailSender.pas`.
+1. Baixe o arquivo `EmailSender.pas`.
 2. Adicione o arquivo ao seu projeto Delphi.
-3. Na seção "uses" do seu projeto, adicione `TEmailSender` à lista de unidades.
-4. Comece a usar a classe `TEmailSender` no seu código.
+3. Na seção "uses" do seu projeto, adicione `EmailSender` à lista de unidades.
+4. Comece a usar a classe `EmailSender` no seu código.
 
 ## Usage
 Here's an example of how to use the TEmailSender class:
