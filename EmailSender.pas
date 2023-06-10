@@ -3,103 +3,104 @@ unit EmailSender;
 interface
 
 uses
-  SysUtils, Classes, IdSMTP, IdMessage;
+  System.SysUtils, System.Classes, IdSMTP, IdSSLOpenSSL, IdMessage, IdText,
+  IdExplicitTLSClientServerBase, IdAttachmentFile;
 
 type
   TEmailSender = class
   private
-    FSMTP: TIdSMTP;
-    FMailMessage: TIdMessage;
-    FHost: string;
-    FPort: Integer;
-    FUsername: string;
-    FPassword: string;
-    FFrom: string;
-    FFromName: string;
-    FTo: string;
+    FFromAddress: string;
+    FToAddress: string;
     FSubject: string;
     FBody: string;
-    FAttachments: TStringList;
-    procedure SetHost(const Value: string);
-    procedure SetPassword(const Value: string);
-    procedure SetUsername(const Value: string);
-    procedure SetPort(const Value: Integer);
-    procedure SetFrom(const Value: string);
-    procedure SetFromName(const Value: string);
-    procedure SetTo(const Value: string);
+    FSMTPHost: string;
+    FSMTPPort: Integer;
+    FSMTPUsername: string;
+    FSMTPPassword: string;
+    FAttachmentFilePath: string;
+    procedure SetFromAddress(const Value: string);
+    procedure SetToAddress(const Value: string);
     procedure SetSubject(const Value: string);
     procedure SetBody(const Value: string);
-    procedure SetAttachments(const Value: TStringList);
+    procedure SetSMTPHost(const Value: string);
+    procedure SetSMTPPort(const Value: Integer);
+    procedure SetSMTPUsername(const Value: string);
+    procedure SetSMTPPassword(const Value: string);
   public
-    constructor Create;
-    destructor Destroy; override;
-    procedure AddAttachment(const FileName: string);
     procedure SendEmail;
-    property Host: string read FHost write SetHost;
-    property Port: Integer read FPort write SetPort;
-    property Username: string read FUsername write SetUsername;
-    property Password: string read FPassword write SetPassword;
-    property From: string read FFrom write SetFrom;
-    property FromName: string read FFromName write SetFromName;
-    property ToAddress: string read FTo write SetTo;
+    property FromAddress: string read FFromAddress write SetFromAddress;
+    property ToAddress: string read FToAddress write SetToAddress;
     property Subject: string read FSubject write SetSubject;
     property Body: string read FBody write SetBody;
-    property Attachments: TStringList read FAttachments write SetAttachments;
+    property SMTPHost: string read FSMTPHost write SetSMTPHost;
+    property SMTPPort: Integer read FSMTPPort write SetSMTPPort;
+    property SMTPUsername: string read FSMTPUsername write SetSMTPUsername;
+    property SMTPPassword: string read FSMTPPassword write SetSMTPPassword;
+    property AttachmentFilePath: string read FAttachmentFilePath
+      write FAttachmentFilePath;
   end;
 
 implementation
 
 { TEmailSender }
 
-constructor TEmailSender.Create;
-begin
-  FSMTP := TIdSMTP.Create(nil);
-  FMailMessage := TIdMessage.Create(nil);
-  FAttachments := TStringList.Create;
-end;
-
-destructor TEmailSender.Destroy;
-begin
-  FreeAndNil(FMailMessage);
-  FreeAndNil(FSMTP);
-  FreeAndNil(FAttachments);
-  inherited;
-end;
-
-procedure TEmailSender.AddAttachment(const FileName: string);
-begin
-  FMailMessage.Attachments.Add(FileName);
-end;
-
 procedure TEmailSender.SendEmail;
+var
+  IdSMTP: TIdSMTP;
+  IdSSL: TIdSSLIOHandlerSocketOpenSSL;
+  IdMessage: TIdMessage;
+  IdText: TIdText;
+  Attachment: TIdAttachmentFile;
+  Template: TStringList;
 begin
-  FSMTP.Host := FHost;
-  FSMTP.Port := FPort;
-  FSMTP.Username := FUsername;
-  FSMTP.Password := FPassword;
-
-  FMailMessage.From.Address := FFrom;
-  FMailMessage.From.Name := FFromName;
-  FMailMessage.Recipients.EMailAddresses := FTo;
-  FMailMessage.Subject := FSubject;
-  FMailMessage.Body.Text := FBody;
-
+  IdSMTP := TIdSMTP.Create(nil);
+  IdSSL := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
+  IdMessage := TIdMessage.Create(nil);
+  Template := TStringList.Create;
   try
-    FSMTP.Connect;
-    try
-      FSMTP.Send(FMailMessage);
-    finally
-      FSMTP.Disconnect;
-    end;
-  except
-    on E: Exception do
-      raise Exception.Create('Não foi possível enviar o email: ' + E.Message);
-  end;
-end;
+    IdSSL.SSLOptions.Method := sslvTLSv1_2;
+    IdSMTP.IOHandler := IdSSL;
+    IdSMTP.UseTLS := utUseExplicitTLS;
+    IdSMTP.Host := FSMTPHost;
+    IdSMTP.Port := FSMTPPort;
+    IdSMTP.AuthType := satDefault;
+    IdSMTP.Username := FSMTPUsername;
+    IdSMTP.Password := FSMTPPassword;
 
-procedure TEmailSender.SetAttachments(const Value: TStringList);
-begin
-  FAttachments := Value;
+    IdMessage.From.Address := FFromAddress;
+    IdMessage.Recipients.Add.Address := FToAddress;
+    IdMessage.Subject := FSubject;
+
+    IdMessage.MessageParts.Clear;
+    IdMessage.ContentType := 'multipart/mixed';
+    IdText := TIdText.Create(IdMessage.MessageParts, nil);
+    IdText.ContentType := 'text/html';
+    Template.LoadFromFile('Template.html');
+    Template.Text := StringReplace(Template.Text, '<%TituloEmail%>', FSubject,
+      [rfReplaceAll]);
+    Template.Text := StringReplace(Template.Text, '<%ConteudoEmail%>', FBody,
+      [rfReplaceAll]);
+    Template.Text := StringReplace(Template.Text, '<%RodapeEmail%>',
+      'Este é um email enviado pela Amil Contabilidade LTDA.', [rfReplaceAll]);
+    IdText.CharSet := 'ISO-8859-1';
+    IdText.Body.Text := Template.Text;
+
+    if FAttachmentFilePath <> '' then
+    begin
+      Attachment := TIdAttachmentFile.Create(IdMessage.MessageParts,
+        FAttachmentFilePath);
+      Attachment.ContentType := 'application/pdf;';
+      Attachment.FileName := ExtractFileName(FAttachmentFilePath);
+    end;
+
+    IdSMTP.Connect;
+    IdSMTP.Send(IdMessage);
+  finally
+    IdSMTP.Disconnect;
+    IdSMTP.Free;
+    IdSSL.Free;
+    IdMessage.Free;
+  end;
 end;
 
 procedure TEmailSender.SetBody(const Value: string);
@@ -107,29 +108,29 @@ begin
   FBody := Value;
 end;
 
-procedure TEmailSender.SetFrom(const Value: string);
+procedure TEmailSender.SetFromAddress(const Value: string);
 begin
-  FFrom := Value;
+  FFromAddress := Value;
 end;
 
-procedure TEmailSender.SetFromName(const Value: string);
+procedure TEmailSender.SetSMTPHost(const Value: string);
 begin
-  FFromName := Value;
+  FSMTPHost := Value;
 end;
 
-procedure TEmailSender.SetHost(const Value: string);
+procedure TEmailSender.SetSMTPPassword(const Value: string);
 begin
-  FHost := Value;
+  FSMTPPassword := Value;
 end;
 
-procedure TEmailSender.SetPassword(const Value: string);
+procedure TEmailSender.SetSMTPPort(const Value: Integer);
 begin
-  FPassword := Value;
+  FSMTPPort := Value;
 end;
 
-procedure TEmailSender.SetPort(const Value: Integer);
+procedure TEmailSender.SetSMTPUsername(const Value: string);
 begin
-  FPort := Value;
+  FSMTPUsername := Value;
 end;
 
 procedure TEmailSender.SetSubject(const Value: string);
@@ -137,14 +138,9 @@ begin
   FSubject := Value;
 end;
 
-procedure TEmailSender.SetTo(const Value: string);
+procedure TEmailSender.SetToAddress(const Value: string);
 begin
-  FTo := Value;
-end;
-
-procedure TEmailSender.SetUsername(const Value: string);
-begin
-  FUsername := Value;
+  FToAddress := Value;
 end;
 
 end.
