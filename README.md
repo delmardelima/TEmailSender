@@ -46,16 +46,17 @@ var
 begin
   email := TEmailSender.Create;
   try
-    email.Server := 'smtp.yourserver.com';
-    email.Username := 'youremail@yourserver.com';
-    email.Password := 'yourpassword';
-    email.From := 'youremail@yourserver.com';
-    email.Recipient := 'recipient@yourserver.com';
+    email.SMTPHost := 'smtp.yourserver.com';
+    email.SMTPPort := 587;
+    email.SMTPUsername := 'youremail@yourserver.com';
+    email.SMTPPassword := 'yourpassword';
+    email.FromAddress := 'youremail@yourserver.com';
+    email.ToAddress := 'recipient@yourserver.com';
     email.Subject := 'Test email with attachment';
     email.Body := 'This is a test email with attachment';
-    email.AddAttachment('c:\attachedfile.pdf');
+    email.AttachmentFilePath := 'c:\attachedfile.pdf';
     try
-      email.Send;
+      email.SendEmail;
     except
       on E: Exception do
         ShowMessage('Error sending email: ' + E.Message);
@@ -74,16 +75,17 @@ var
 begin
   email := TEmailSender.Create;
   try
-    email.Server := 'smtp.seuservidor.com';
-    email.Username := 'seuemail@seuservidor.com';
-    email.Password := 'suasenha';
-    email.From := 'seuemail@seuservidor.com';
-    email.Recipient := 'destinatario@seuservidor.com';
+    email.SMTPHost := 'smtp.seuservidor.com';
+    email.SMTPPort := 587;
+    email.SMTPUsername := 'seuemail@seuservidor.com';
+    email.SMTPPassword := 'suasenha';
+    email.FromAddress := 'seuemail@seuservidor.com';
+    email.ToAddress := 'destinatario@seuservidor.com';
     email.Subject := 'Teste de envio de e-mail com anexo';
     email.Body := 'Este é um teste de envio de e-mail com anexo';
-    email.AddAttachment('c:\arquivoanexo.pdf');
+    email.AttachmentFilePath := 'c:\arquivoanexo.pdf';
     try
-      email.Send;
+      email.SendEmail;
     except
       on E: Exception do
         ShowMessage('Erro ao enviar e-mail: ' + E.Message);
