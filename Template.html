@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="ISO-8859-1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    /* Estilos gerais */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      color: #333333;
+    }
+
+    table {
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+
+    td {
+      vertical-align: top;
+    }
+
+    img {
+      display: block;
+      max-width: 64px;
+      max-height: 28px;
+      height: auto;
+      width: auto;
+    }
+
+    a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    /* Estilos do cabeçalho f0f0f0 */
+    .header {
+      background-color: #007bff;
+      padding: 20px;
+    }
+
+    .header-logo {
+      width: 200px;
+      height: auto;
+    }
+
+    /* Estilos do conteúdo */
+    .content {
+      background-color: #ffffff;
+      padding: 20px;
+    }
+
+    .content-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .content-text {
+      margin-bottom: 20px;
+    }
+
+    .content-button {
+      display: inline-block;
+      background-color: #007bff;
+      color: #ffffff;
+      padding: 10px 20px;
+      border-radius: 5px;
+    }
+
+    /* Estilos do rodapé f0f0f0 999999*/
+    .footer {
+      background-color: #007bff;
+      padding: 20px;
+    }
+
+    .footer-text {
+      font-size: 14px;
+      color: #ffffff;
+    }
+
+    /* Media queries para telas pequenas */
+    @media (max-width: 600px) {
+
+      /* Reduz o tamanho da fonte do título */
+      .content-title {
+        font-size: 20px;
+      }
+
+      /* Aumenta o tamanho da fonte do botão */
+      .content-button {
+        font-size: 18px;
+        padding: 15px 25px;
+      }
+      
+    }
+    
+  </style>
+</head>
+<body>
+  <!-- Tabela principal que envolve todo o email -->
+  <table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <!-- Célula do cabeçalho -->
+      <td class="header" align="center">
+        <!-- Tabela interna do cabeçalho -->
+        <table width="600" cellpadding="0" cellspacing="0">
+          <tr>
+            <!-- Célula com o logo -->
+            <td align="left">
+              <img src="https://amil.cnt.br/img/logoEmail.png" alt="Logotipo Amil Contabilidade" class="header-logo" width="68" height="28">
+            </td>
+          </tr>
+        </table>
+        <!-- Fim da tabela interna do cabeçalho -->
+      </td>
+    </tr>
+    <tr>
+       <!-- Célula do conteúdo -->
+       <td class="content" align="center">
+         <!-- Tabela interna do conteúdo -->
+         <table width="600" cellpadding="0" cellspacing="0">
+           <tr>
+             <!-- Célula com o título -->
+             <td align="left">
+               <h1 class="content-title"><%TituloEmail%></h1>
+             </td>
+           </tr>
+           <tr>
+             <!-- Célula com o texto -->
+             <td align="left">
+               <p class="content-text"><%ConteudoEmail%></p>
+             </td>
+           </tr>
+         </table>
+         <!-- Fim da tabela interna do conteúdo -->
+       </td>
+    </tr>
+    <tr>
+      <!-- Célula do rodapé -->
+      <td class="footer" align="center">
+        <!-- Tabela interna do rodapé -->
+        <table width="600" cellpadding="0" cellspacing="0">
+          <tr>
+            <!-- Célula com o texto -->
+            <td align="center">
+              <p class="footer-text"><%RodapeEmail%></p>
+            </td>
+          </tr>
+        </table>
+        <!-- Fim da tabela interna do rodapé -->
+      </td>
+    </tr>
+  </table>
+  <!-- Fim da tabela principal que envolve todo o email -->
+</body>
+</html>
